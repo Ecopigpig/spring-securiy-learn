@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper"><!--  mapper相对路径-->
+
+    <resultMap id="BaseResultMap" type="com.example.demo.model.User"><!--  model相对路径-->
+        <result column="Id" jdbcType="INTEGER" property="id"/>
+        <result column="UserName" jdbcType="VARCHAR" property="userName"/>
+        <result column="CreatedDT" jdbcType="TIMESTAMP" property="createdDT"/>
+        <result column="Age" jdbcType="INTEGER" property="age"/>
+        <result column="Gender" jdbcType="INTEGER" property="gender"/>
+        <result column="Password" jdbcType="VARCHAR" property="passWord"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Id, UserName, CreatedDT, Age, Gender,Password
+    </sql>
+
+    <select id="selectOneByName" parameterType="com.example.demo.model.User" resultMap="BaseResultMap"><!--  model相对路径-->
+        SELECT u.*,r.role FROM `user` u LEFT JOIN role r on u.Id = r.UserId
+        where u.UserName = #{userName,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

@@ -1,6 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.User;
+import com.example.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 public class HelloController {
+    
     @GetMapping("/hello")
     public String hello() {
         return "hello";
@@ -19,5 +26,11 @@ public class HelloController {
     @GetMapping("/vercode")
     public String vercode() {
         return "vercode";
+    }
+
+    @PreAuthorize("hasRole('admin')")
+    @RequestMapping(value = "/delete")
+    public String delete() {
+        return "success";
     }
 }
