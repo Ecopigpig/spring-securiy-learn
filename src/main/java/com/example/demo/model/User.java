@@ -18,6 +18,8 @@ import java.util.List;
 @Data
 public class User implements UserDetails {
 
+    private static final long serialVersionUID = 9133476958297294605L;
+
     public User(){}
 
     public User(String userName, String passWord, List<GrantedAuthority> authorities) {
@@ -25,8 +27,6 @@ public class User implements UserDetails {
         this.passWord = passWord;
         this.authorities = authorities;
     }
-
-    private static final long serialVersionUID = 9133476958297294605L;
 
     private Integer id;
 

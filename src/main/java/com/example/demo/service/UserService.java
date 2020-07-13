@@ -9,5 +9,7 @@ import com.example.demo.model.User;
  * @create: 2020-07-11 17:11
  **/
 public interface UserService {
-    User selectOneByName(User user);
+    User selectOneByName(String username);
+
+    int delete(User user);
 }

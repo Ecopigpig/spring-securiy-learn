@@ -6,6 +6,8 @@ import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * @program: spring-security
  * @description: 用户服务层实现类
@@ -15,11 +17,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Override
-    public User selectOneByName(User user) {
-        return userMapper.selectOneByName(user);
+    public User selectOneByName(String username) {
+        return userMapper.selectOneByName(username);
+    }
+
+    @Override
+    public int delete(User user) {
+        return userMapper.delete(user.getId());
     }
 }

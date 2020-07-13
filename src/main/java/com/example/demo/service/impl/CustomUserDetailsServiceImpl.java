@@ -1,12 +1,14 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.User;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,7 @@ import java.util.List;
  * @create: 2020-07-11 17:28
  **/
 @Component
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserService userService;
@@ -32,12 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.selectOneByName(new User() {
-            @Override
-            public void setUserName(String userName) {
-                super.setUserName(userName);
-            }
-        });
+        User user = userService.selectOneByName(username);
         if (user == null) {
             throw new UsernameNotFoundException("用户不存在");
         }
@@ -49,10 +46,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         //角色必须以‘ROLE_’开头，数据库中没有，则在这里加
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return new User(
                 user.getUsername(),
-                user.getPassword(),
+                encoder.encode(user.getPassword()),
                 authorities
         );
     }
+
+
 }

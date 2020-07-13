@@ -11,5 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  **/
 @Mapper
 public interface UserMapper {
-    User selectOneByName(User user);
+    User selectOneByName(String username);
+
+    int delete(Integer id);
 }

@@ -1,20 +1,19 @@
 server:
   port: 6061
 
-## ≈‰÷√ spring securityµƒ’À∫≈√‹¬Î
 #spring:
 #  security:
 #   user:
 #    name: javaboy
 #    password: 123
 
-mybatis-plus:
+mybatis:
   mapper-locations: classpath*:mapper/**/*Mapper.xml
 
 spring:
   datasource:
     type:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:6399/inspection-v3?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&allowMultiQueries=true
-    username: xintinglin
-    password: modrQXJbc4v5WPaDjGu9sOr93uJFHMAH
+    url: jdbc:mysql://127.0.0.1:3306/security?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: root
+    password: 123456

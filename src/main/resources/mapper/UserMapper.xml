@@ -15,9 +15,13 @@
         Id, UserName, CreatedDT, Age, Gender,Password
     </sql>
 
-    <select id="selectOneByName" parameterType="com.example.demo.model.User" resultMap="BaseResultMap"><!--  model相对路径-->
+    <select id="selectOneByName" parameterType="java.lang.String" resultMap="BaseResultMap"><!--  model相对路径-->
         SELECT u.*,r.role FROM `user` u LEFT JOIN role r on u.Id = r.UserId
         where u.UserName = #{userName,jdbcType=VARCHAR}
     </select>
+
+    <delete id="delete">
+        delete from `user` where id = #{id}
+    </delete>
 
 </mapper>
